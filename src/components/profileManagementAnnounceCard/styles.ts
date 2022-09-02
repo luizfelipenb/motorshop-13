@@ -11,7 +11,7 @@ export const Container = styled.div`
   margin: 65px 16px 44px 16px;
   justify-self: center;
   max-width: 1240px;
-
+  width: 90%;
   @media screen and (min-width: 900px) {
     margin: 75px 181px 100px 181px;
   }

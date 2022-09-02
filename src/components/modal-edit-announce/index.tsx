@@ -22,21 +22,22 @@ import { ModalOverlay } from "../modal-overlay";
 import Input from "../input";
 import ButtonAddImgToGallery from "../button-add-img-to-gallery";
 
-const ModalEditAnnounce: React.FC = () => {
+const ModalEditAnnounce: React.FC<{ announceData?: any }> = ({
+  announceData,
+}) => {
   const [typeAnnouce, setTypeAnnouce] = React.useState(
     TypeAnnounceVariation.SALE
   );
   const [typeVeicle, setTypeVeicle] = React.useState(TypeVeicleVariation.CAR);
-  const [typePublished, setTypePublished] = React.useState(
-    TypePublishedVariation.NO
-  );
 
   const formRef = React.useRef({} as any);
 
   return (
     <ModalOverlay>
       <Container ref={formRef} onSubmit={() => console.log("submited")}>
-        <ModalHeader title="Editar anuncio" />
+        <ModalHeader
+          title={announceData ? "Editar anuncio" : "Criar anuncio"}
+        />
         <StyledToggleDiv>
           <h3>Tipo de anuncio</h3>
           <StyledRoot
@@ -75,18 +76,7 @@ const ModalEditAnnounce: React.FC = () => {
             <StyledItem value={TypeVeicleVariation.MOTOCYCLE}>Moto</StyledItem>
           </StyledRoot>
         </StyledToggleDiv>
-        <StyledToggleDiv>
-          <StyledRoot
-            type="single"
-            onValueChange={(value: TypePublishedVariation) => {
-              setTypePublished(value);
-            }}
-            defaultValue={typePublished}
-          >
-            <StyledItem value={TypePublishedVariation.YES}>Sim</StyledItem>
-            <StyledItem value={TypePublishedVariation.NO}>Nao</StyledItem>
-          </StyledRoot>
-        </StyledToggleDiv>
+
         <StyledInputDiv>
           <Input
             label="Imagem da capa"

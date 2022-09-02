@@ -84,4 +84,10 @@ export const StyledActionDiv = styled.div`
   display: flex;
   gap: 8px;
   width: 90%;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (min-width: 900px) {
+    justify-content: flex-end;
+  }
 `;

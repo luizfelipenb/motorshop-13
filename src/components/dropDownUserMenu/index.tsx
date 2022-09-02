@@ -1,10 +1,11 @@
 import React from "react";
 import { useAuth } from "../../core/providers/Auth";
+import { UserData } from "../../interfaces/user-interfaces";
 import GlobalLoader from "../loader";
 
 import { Container, StyledDropDownItem } from "./styles";
 
-const DropDownUserMenu: React.FC = () => {
+const DropDownUserMenu: React.FC<{ userData: UserData }> = ({ userData }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const { logOut } = useAuth();
 
@@ -21,7 +22,9 @@ const DropDownUserMenu: React.FC = () => {
       <Container>
         <StyledDropDownItem>Editar Perfil</StyledDropDownItem>
         <StyledDropDownItem>Editar endereço</StyledDropDownItem>
-        <StyledDropDownItem>Minhas Compras</StyledDropDownItem>
+        <StyledDropDownItem>
+          {userData.isSeller ? "Meus anuncios" : "Minhas Compras"}
+        </StyledDropDownItem>
         <StyledDropDownItem onClick={handleLogOut}>Sair</StyledDropDownItem>
       </Container>
       <GlobalLoader isLoading={isLoading} />

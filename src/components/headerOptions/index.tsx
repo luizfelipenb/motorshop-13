@@ -14,6 +14,7 @@ import {
   StyledNavigationList,
   StyledNavigationItem,
 } from "./styles";
+import { UserData } from "../../interfaces/user-interfaces";
 
 type Props = JSX.IntrinsicElements["header"];
 
@@ -21,6 +22,8 @@ export const HeaderOptions: React.FC<Props> = ({ ...props }) => {
   const [userName, setUserName] = React.useState(
     localStorage.getItem("@user:name") || " "
   );
+  const [userData, setUserData] = React.useState({} as UserData);
+
   const { isAuthenticated, fetchUserData } = useAuth();
   const navigate = useNavigate();
 
@@ -29,6 +32,7 @@ export const HeaderOptions: React.FC<Props> = ({ ...props }) => {
       .then((response) => {
         localStorage.setItem("@user:name", response.name);
         setUserName(response.name);
+        setUserData(response);
       })
       .catch(errorFeedback);
   }, [userName]);
@@ -51,7 +55,7 @@ export const HeaderOptions: React.FC<Props> = ({ ...props }) => {
           <StyledTrigger>
             <ProfileLogger name={userName} />
           </StyledTrigger>
-          <DropDownUserMenu />
+          <DropDownUserMenu userData={userData} />
         </DropdownMenu.Root>
       ) : (
         <StyledAuthManagement>
