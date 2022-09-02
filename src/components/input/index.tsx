@@ -6,27 +6,13 @@ import { Container, StyledInputContainer, ErrorSpan } from "./styles";
 interface PropsLike {
   label: string;
   name: string;
-  placeholder?: string;
-  type?: string;
-  value?: string;
-  id?: string;
   mask?: (value: string) => string;
   iso?: (value: string) => string;
 }
 
 type InputProps = React.InputHTMLAttributes<HTMLDivElement> & PropsLike;
 
-const Input: React.FC<InputProps> = ({
-  label,
-  name,
-  placeholder,
-  type = "text",
-  value,
-  id,
-  mask,
-  iso,
-  ...rest
-}) => {
+const Input: React.FC<InputProps> = ({ label, name, mask, iso, ...rest }) => {
   const inputRef = React.useRef({} as any);
 
   const { fieldName, registerField, error } = useField(name);
@@ -61,12 +47,9 @@ const Input: React.FC<InputProps> = ({
       <label htmlFor="inputForm">{label}</label>
       <StyledInputContainer>
         <input
-          type={type}
           name={name}
           ref={inputRef}
-          value={value}
           defaultValue=""
-          placeholder={placeholder}
           onChange={_change}
           {...rest}
         />
