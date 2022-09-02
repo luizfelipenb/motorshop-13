@@ -1,7 +1,15 @@
 import React from "react";
 import ModalHeader from "../header-modal";
 
-import { Container, StyledItem, StyledRoot, StyledToggleDiv } from "./styles";
+import {
+  Container,
+  StyledItem,
+  StyledRoot,
+  StyledToggleDiv,
+  StyledInputDiv,
+  StyledDivGrid,
+  StyledActionDiv,
+} from "./styles";
 
 import {
   ButtonVariation,
@@ -18,16 +26,16 @@ const ModalEditAnnounce: React.FC = () => {
   const [typeAnnouce, setTypeAnnouce] = React.useState(
     TypeAnnounceVariation.SALE
   );
-
   const [typeVeicle, setTypeVeicle] = React.useState(TypeVeicleVariation.CAR);
-
   const [typePublished, setTypePublished] = React.useState(
     TypePublishedVariation.NO
   );
 
+  const formRef = React.useRef({} as any);
+
   return (
     <ModalOverlay>
-      <Container>
+      <Container ref={formRef} onSubmit={() => console.log("submited")}>
         <ModalHeader title="Editar anuncio" />
         <StyledToggleDiv>
           <h3>Tipo de anuncio</h3>
@@ -38,22 +46,22 @@ const ModalEditAnnounce: React.FC = () => {
             }}
             defaultValue={typeAnnouce}
           >
-            <StyledItem value={TypeAnnounceVariation.SALE}>
-              <Button layout={ButtonVariation.PRIMARY}>Venda</Button>
-            </StyledItem>
+            <StyledItem value={TypeAnnounceVariation.SALE}>Venda</StyledItem>
             <StyledItem value={TypeAnnounceVariation.AUCTION}>
-              <Button layout={ButtonVariation.PRIMARY}>Leilao</Button>
+              Leilao
             </StyledItem>
           </StyledRoot>
         </StyledToggleDiv>
-        <div>
+        <StyledInputDiv>
           <h3>Informacoes do veiculo</h3>
           <Input label="Titulo" name="title" />
-          <Input label="Ano" name="year" />
-          <Input label="Quilometragem" name="km" />
-          <Input label="Preco" name="price" />
+          <StyledDivGrid>
+            <Input label="Ano" name="year" />
+            <Input label="Quilometragem" name="km" />
+            <Input label="Preco" name="price" className="lastChild" />
+          </StyledDivGrid>
           <Input label="Decricao" name="description" />
-        </div>
+        </StyledInputDiv>
         <StyledToggleDiv>
           <h3>Tipo de Veiculo</h3>
           <StyledRoot
@@ -63,12 +71,8 @@ const ModalEditAnnounce: React.FC = () => {
             }}
             defaultValue={typeVeicle}
           >
-            <StyledItem value={TypeVeicleVariation.CAR}>
-              <Button layout={ButtonVariation.PRIMARY}>Carro</Button>
-            </StyledItem>
-            <StyledItem value={TypeVeicleVariation.MOTOCYCLE}>
-              <Button layout={ButtonVariation.PRIMARY}>Moto</Button>
-            </StyledItem>
+            <StyledItem value={TypeVeicleVariation.CAR}>Carro</StyledItem>
+            <StyledItem value={TypeVeicleVariation.MOTOCYCLE}>Moto</StyledItem>
           </StyledRoot>
         </StyledToggleDiv>
         <StyledToggleDiv>
@@ -79,37 +83,35 @@ const ModalEditAnnounce: React.FC = () => {
             }}
             defaultValue={typePublished}
           >
-            <StyledItem value={TypePublishedVariation.YES}>
-              <Button layout={ButtonVariation.PRIMARY}>Sim</Button>
-            </StyledItem>
-            <StyledItem value={TypePublishedVariation.NO}>
-              <Button layout={ButtonVariation.PRIMARY}>Nao</Button>
-            </StyledItem>
+            <StyledItem value={TypePublishedVariation.YES}>Sim</StyledItem>
+            <StyledItem value={TypePublishedVariation.NO}>Nao</StyledItem>
           </StyledRoot>
         </StyledToggleDiv>
-        <Input
-          label="Imagem da capa"
-          name="cover-image"
-          placeholder="https://image.com"
-        />
-        <Input
-          label="1 imagem da galeria"
-          name="first_image"
-          placeholder="https://image.com"
-        />
-        <Input
-          label="2 imagem da galeria"
-          name="second_image"
-          placeholder="https://image.com"
-        />
+        <StyledInputDiv>
+          <Input
+            label="Imagem da capa"
+            name="cover-image"
+            placeholder="https://image.com"
+          />
+          <Input
+            label="1 imagem da galeria"
+            name="first_image"
+            placeholder="https://image.com"
+          />
+          <Input
+            label="2 imagem da galeria"
+            name="second_image"
+            placeholder="https://image.com"
+          />
+        </StyledInputDiv>
         <ButtonAddImgToGallery>
           Adicionar campo para imagem da galeria
         </ButtonAddImgToGallery>
 
-        <div>
+        <StyledActionDiv>
           <Button layout={ButtonVariation.GAYSCALE}>Excluir anúncio</Button>
           <Button layout={ButtonVariation.BOLDPURPLE}>Salvar alterações</Button>
-        </div>
+        </StyledActionDiv>
       </Container>
     </ModalOverlay>
   );

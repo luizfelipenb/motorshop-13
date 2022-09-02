@@ -49,7 +49,7 @@ export const lightTheme: DefaultTheme = {
       auctionCardGradient:
         "linear-gradient(180deg, rgba(0, 0, 0, 0.29) 0%, #000000 100%)",
       announceGradient:
-        "linear-gradient(180deg, #4529E6 31.25%, #F1F3F5 31.26%, #F1F3F5 100%)",
+        "linear-gradient(180deg, #4529E6 16.25%, #F1F3F5 16.26%, #F1F3F5 100%)",
     },
   },
 };
